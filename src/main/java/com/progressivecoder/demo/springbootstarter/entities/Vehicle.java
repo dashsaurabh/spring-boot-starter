@@ -18,6 +18,8 @@ public class Vehicle {
 
     private String model;
 
+    private String status;
+
     public Vehicle() {
     }
 
@@ -53,6 +55,14 @@ public class Vehicle {
         this.model = model;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -60,6 +70,7 @@ public class Vehicle {
                 ", vehicleIdentityNumber='" + vehicleIdentityNumber + '\'' +
                 ", make='" + make + '\'' +
                 ", model='" + model + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }
