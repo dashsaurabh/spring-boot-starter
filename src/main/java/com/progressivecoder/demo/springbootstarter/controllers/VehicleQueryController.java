@@ -1,4 +1,4 @@
-package com.progressivecoder.demo.springbootstarter;
+package com.progressivecoder.demo.springbootstarter.controllers;
 
 import com.progressivecoder.demo.springbootstarter.dto.VehicleQueryDTO;
 import com.progressivecoder.demo.springbootstarter.services.VehicleQueryService;
