@@ -6,6 +6,7 @@ import com.progressivecoder.demo.springbootstarter.repositories.VehicleRepositor
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -22,7 +23,7 @@ public class VehicleQueryServiceImpl implements VehicleQueryService {
             Vehicle fetchedVehicle = vehicleRepository.findById(id).get();
             return new VehicleQueryDTO(fetchedVehicle.getId(), fetchedVehicle.getVehicleIdentityNumber(), fetchedVehicle.getMake(), fetchedVehicle.getModel());
         }else{
-            return null;
+            throw new EntityNotFoundException("Vehicle Id " + id.toString() + " not found in the database");
         }
     }
 
@@ -34,6 +35,10 @@ public class VehicleQueryServiceImpl implements VehicleQueryService {
             vehicleList.add(new VehicleQueryDTO(vehicle.getId(), vehicle.getVehicleIdentityNumber(), vehicle.getMake(), vehicle.getModel()));
         });
 
-        return vehicleList;
+        if (vehicleList.size() > 0){
+            return vehicleList;
+        }else{
+            throw new EntityNotFoundException("No Vehicles Found in the Database");
+        }
     }
 }

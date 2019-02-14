@@ -9,6 +9,7 @@ import com.progressivecoder.demo.springbootstarter.repositories.VehicleRepositor
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.UUID;
 
 @Service
@@ -44,7 +45,7 @@ public class VehicleCommandServiceImpl implements VehicleCommandService {
             return new VehicleQueryDTO(updatedVehicle.getId(), updatedVehicle.getVehicleIdentityNumber(),
                     updatedVehicle.getMake(), updatedVehicle.getModel());
         }else{
-            return null;
+            throw new EntityNotFoundException("Vehicle Id " + id.toString() + " not found in the database");
         }
     }
 
