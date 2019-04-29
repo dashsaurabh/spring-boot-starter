@@ -1,10 +1,21 @@
-FROM maven:3.6.1-jdk-8-alpine as BUILD
-COPY src /home/app/src
-COPY pom.xml /home/app
-RUN mvn -f /home/app/pom.xml clean package
-
+# Start with base image
 FROM openjdk:8-jdk-alpine
+
+# Add Maintainer Info
+LABEL maintainer="Progressive Coder"
+
+# Add a temporary volume
 VOLUME /tmp
-COPY --from=build /home/app/target/spring-boot-starter-0.0.1-SNAPSHOT.jar /usr/local/lib/spring-boot-starter.jar
+
+# Expose Port 8080
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/local/lib/spring-boot-starter.jar"]
+
+# Application Jar File
+ARG JAR_FILE=target/spring-boot-starter-0.0.1-SNAPSHOT.jar
+
+# Add Application Jar File to the Container
+ADD ${JAR_FILE} spring-boot-starter.jar
+
+# Run the JAR file
+ENTRYPOINT ["java", "-jar", "/spring-boot-starter.jar"]
+
