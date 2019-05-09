@@ -54,12 +54,27 @@ class DemoCommandLineRunner implements CommandLineRunner{
 
 		vehicleRepository.save(tesla);
 
+		User admin = new User();
+		admin.setUsername("application-admin");
+		admin.setPassword(passwordEncoder.encode("password"));
+		admin.grantAuthority(Role.ROLE_ADMIN);
+
+		userRepository.save(admin);
+
 		User user = new User();
 		user.setUsername("application-user");
 		user.setPassword(passwordEncoder.encode("password"));
-		user.grantAuthority(Role.ROLE_ADMIN);
+		user.grantAuthority(Role.ROLE_USER);
 
 		userRepository.save(user);
+
+		User superUser = new User();
+		superUser.setUsername("application-super-user");
+		superUser.setPassword(passwordEncoder.encode("password"));
+		superUser.grantAuthority(Role.ROLE_USER);
+		superUser.grantAuthority(Role.ROLE_ADMIN);
+
+		userRepository.save(superUser);
 	}
 }
 
