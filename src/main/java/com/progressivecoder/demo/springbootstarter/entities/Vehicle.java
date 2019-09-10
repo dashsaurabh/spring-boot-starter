@@ -10,7 +10,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "vehicle")
 @Audited
-public class Vehicle {
+public class Vehicle extends Auditable<String> {
 
     @Id
     private UUID id;
